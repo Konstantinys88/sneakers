@@ -84,6 +84,54 @@ ul li {
 	}
 }
 
+.card {
+	border-radius: 40px;
+	border: 1px solid #F3F3F3;
+	background: #FFF;
+	padding: 20px;
+	width: 220px;
+
+	p {
+		color: #000;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: normal;
+	}
+
+	&__bottom {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		span {
+			color: #BDBDBD;
+			font-size: 11px;
+			font-style: normal;
+			font-weight: 500;
+			line-height: normal;
+			text-transform: uppercase;
+		}
+	}
+
+	&__button {
+		cursor: pointer;
+		width: 32px;
+		height: 32px;
+		background: #ffffff;
+		border: 1px solid #f2f2f2;
+		border-radius: 8px;
+	}
+}
+
 .content {
 	padding: 40px;
+
+	&__sneackers {
+		margin-top: 40px;
+		display: flex;
+		gap: 40px;
+		flex-wrap: wrap;
+
+	}
 }

@@ -32,9 +32,78 @@ function App() {
 
 			</header>
 
+
 			<div className="content">
-				<h1>Все кроссовки</h1>
-				.....
+
+				<h1 className="content__title">Все кроссовки</h1>
+
+				<div className="content__sneackers">
+
+					<div className="card">
+						<img width={133} height={112} src="/img/sneackers/2.jpg" alt="sneackers" />
+						<p>Мужские Кроссовки Nike Blazer Mid Suede</p>
+						<br />
+						<div className="card__bottom">
+							<div className="card__price">
+								<span>Цена:</span>
+								<br />
+								<b>12 999 руб.</b>
+							</div>
+							<button className="card__button">
+								<img width={32} height={32} src="/img/plus.svg" alt="plus" />
+							</button>
+						</div>
+					</div>
+
+					<div className="card">
+						<img width={133} height={112} src="/img/sneackers/2.jpg" alt="sneackers" />
+						<p>Мужские Кроссовки Nike Blazer Mid Suede</p>
+						<br />
+						<div className="card__bottom">
+							<div className="card__price">
+								<span>Цена:</span>
+								<br />
+								<b>12 999 руб.</b>
+							</div>
+							<button className="card__button">
+								<img width={32} height={32} src="/img/plus.svg" alt="plus" />
+							</button>
+						</div>
+					</div>
+
+					<div className="card">
+						<img width={133} height={112} src="/img/sneackers/2.jpg" alt="sneackers" />
+						<p>Мужские Кроссовки Nike Blazer Mid Suede</p>
+						<br />
+						<div className="card__bottom">
+							<div className="card__price">
+								<span>Цена:</span>
+								<br />
+								<b>12 999 руб.</b>
+							</div>
+							<button className="card__button">
+								<img width={32} height={32} src="/img/plus.svg" alt="plus" />
+							</button>
+						</div>
+					</div>
+
+					<div className="card">
+						<img width={133} height={112} src="/img/sneackers/2.jpg" alt="sneackers" />
+						<p>Мужские Кроссовки Nike Blazer Mid Suede</p>
+						<br />
+						<div className="card__bottom">
+							<div className="card__price">
+								<span>Цена:</span>
+								<br />
+								<b>12 999 руб.</b>
+							</div>
+							<button className="card__button">
+								<img width={32} height={32} src="/img/plus.svg" alt="plus" />
+							</button>
+						</div>
+					</div>
+				</div>
+
 			</div>
 
 		</div>
