@@ -179,5 +179,122 @@ ul li {
 		width: 200px;
 	}
 
-	&__icon {}
+}
+
+.overlay {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.11);
+	z-index: 1;
+}
+
+.driwer {
+	position: absolute;
+	width: 420px;
+	height: 100%;
+	right: 0;
+	background: #FFF;
+
+	display: flex;
+	flex-direction: column;
+
+	box-shadow: -10px 4px 24px 0px rgba(0, 0, 0, 0.10);
+	padding: 30px;
+
+	h2 {
+		margin-bottom: 30px;
+		display: flex;
+		justify-content: space-between;
+	}
+}
+
+.cardItems {
+	flex: 1;
+	overflow: auto;
+}
+
+.cartItem {
+	border-radius: 20px;
+	border: 1px solid #F3F3F3;
+	display: flex;
+	align-items: center;
+	gap: 25px;
+	padding: 15px;
+	overflow: hidden;
+	margin-bottom: 20px;
+
+	p {
+		margin-bottom: 5px;
+		color: #000;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: normal;
+	}
+
+	b {
+		font-size: 16px;
+	}
+}
+
+
+.remove {
+	cursor: pointer;
+	opacity: 0.5;
+	transition: opacity 0.15s ease-in-out;
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+.cardAmountPrice {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+
+	&__button {
+		all: unset;
+		width: 100%;
+		border-radius: 18px;
+		background: #9DD458;
+		color: #FFF;
+		text-align: center;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: normal;
+		padding: 18px 0;
+		cursor: pointer;
+		transition: background 0.2s ease-in-out;
+
+		&:hover {
+			background: lighten($color: #9DD458, $amount: 5%)
+		}
+
+		&:active {
+			background: darken($color: #9DD458, $amount: 5%)
+		}
+	}
+}
+
+.amountPrice {
+	display: flex;
+	gap: 10px;
+
+	&__text {
+		color: #000;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: normal;
+	}
+
+	&__dash {
+		flex: 1;
+		border-bottom: 1px dashed #dfdfdf;
+	}
 }

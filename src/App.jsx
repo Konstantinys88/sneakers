@@ -3,6 +3,51 @@
 function App() {
 	return (
 		<div className="wrapper">
+
+			<div className="overlay">
+
+				<div className="driwer">
+					<h2>Корзина
+						<img className="remove" src="/img/btnRemove.svg" alt="remove" />
+					</h2>
+
+					<div className="cardItems">
+
+						<div className="cartItem">
+							<img width={70} height={70} src="/img/sneackers/2.jpg" alt="sneackers" />
+							<div>
+								<p>Мужские кроссовки <br />Nike Blazer Mid Suede</p>
+								<b>12 999 руб.</b>
+							</div>
+							<img className="remove" src="/img/btnRemove.svg" alt="remove" />
+						</div>
+
+						<div className="cartItem">
+							<img width={70} height={70} src="/img/sneackers/2.jpg" alt="sneackers" />
+							<div>
+								<p>Мужские кроссовки <br />Nike Blazer Mid Suede</p>
+								<b>12 999 руб.</b>
+							</div>
+							<img className="remove" src="/img/btnRemove.svg" alt="remove" />
+						</div>
+
+					</div>
+
+					<div className="cardAmountPrice">
+						<ul>
+							<li className="amountPrice">
+								<span className="amountPrice__text">Итого</span>
+								<div className="amountPrice__dash"></div>
+								<b>21 498 руб. </b>
+							</li>
+						</ul>
+						<button className="cardAmountPrice__button">Оформить заказ</button>
+					</div>
+
+				</div>
+
+			</div>
+
 			<header className="header">
 
 				<div className="headerLeft">
@@ -22,7 +67,7 @@ function App() {
 						</li>
 						<li>
 							<img className="header__icon" width={18} height={18} src="img/like.svg" alt="logo" />
-							{/* <span className="headerRight__text">Избранное</span> */}
+							<span className="headerRight__text">Избранное</span>
 						</li>
 						<li>
 							<img className="header__icon" width={18} height={18} src="img/user.svg" alt="logo" />
@@ -31,7 +76,6 @@ function App() {
 				</div>
 
 			</header>
-
 
 			<div className="content">
 
@@ -83,7 +127,7 @@ function App() {
 							</button>
 						</div>
 					</div>
-					
+
 					<div className="card">
 						<div className="card__heart">
 							<img className="card__heart" width={32} height={32} src="/img/heart.svg" alt="heart" />
@@ -102,7 +146,7 @@ function App() {
 							</button>
 						</div>
 					</div>
-			
+
 					<div className="card">
 						<div className="card__heart">
 							<img className="card__heart" width={32} height={32} src="/img/heart.svg" alt="heart" />
@@ -145,7 +189,7 @@ function App() {
 
 			</div>
 
-		</div>
+		</div >
 	);
 }
 
