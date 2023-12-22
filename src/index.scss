@@ -73,6 +73,10 @@ ul li {
 	&__list {
 		display: flex;
 		gap: 32px;
+
+		li {
+			display: flex;
+		}
 	}
 
 	&__text {
@@ -85,11 +89,24 @@ ul li {
 }
 
 .card {
+	display: flex;
+	flex-direction: column;
 	border-radius: 40px;
 	border: 1px solid #F3F3F3;
 	background: #FFF;
 	padding: 20px;
 	width: 220px;
+	transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+
+
+	&:hover {
+		transform: translateY(-5px);
+		box-shadow: 0px 14px 30px 0px rgba(0, 0, 0, 0.08);
+	}
+
+	&__heart {
+		cursor: pointer;
+	}
 
 	p {
 		color: #000;
@@ -134,4 +151,33 @@ ul li {
 		flex-wrap: wrap;
 
 	}
+}
+
+.searchContainer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.searchBlock {
+	display: flex;
+	align-items: center;
+	width: 250px;
+	border-radius: 10px;
+	border: 1px solid #F3F3F3;
+	padding: 0 15px;
+
+	&__search {
+		color: #C4C4C4;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: normal;
+		padding: 13px;
+		border: none;
+		outline: none;
+		width: 200px;
+	}
+
+	&__icon {}
 }
