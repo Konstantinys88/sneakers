@@ -1,14 +1,14 @@
 
 import Content from "./components/content/Content";
 import Header from "./components/header/Header";
-import Overlay from "./components/overlay/Overlay";
+import Driver from "./components/overlay/Driwer";
 
 
 function App() {
 	return (
 		<div className="wrapper">
 
-			<Overlay/>
+			<Driver/>
 
 			<Header />
 			<Content />
