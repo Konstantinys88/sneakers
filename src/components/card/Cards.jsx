@@ -13,7 +13,7 @@ const Cards = ({ name, price, image }) => {
                 <div className="card__price">
                     <span>Цена:</span>
                     <br />
-                    <b>{price}</b>
+                    <b>{price} руб</b>
                 </div>
                 <button className="card__button">
                     <img width={32} height={32} src="/img/plus.svg" alt="plus" />

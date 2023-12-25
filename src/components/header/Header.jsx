@@ -1,6 +1,6 @@
 import './header.scss';
 
-const Header = () => {
+const Header = ({handleDisplayDriwer}) => {
     return (
         <header className="header">
 
@@ -15,7 +15,7 @@ const Header = () => {
 
             <div className="headerRight">
                 <ul className="headerRight__list">
-                    <li>
+                    <li onClick={handleDisplayDriwer}>
                         <img className="header__icon" width={18} height={18} src="img/card.svg" alt="logo" />
                         <span className="headerRight__text">1205 руб.</span>
                     </li>

@@ -46,8 +46,6 @@ const Content = () => {
 
     const cardsItems = renderCards(arr);
 
-
-
     return (
         <div className="content">
 
