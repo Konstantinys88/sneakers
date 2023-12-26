@@ -1,22 +1,30 @@
 
 import './overlay.scss';
-const Overlay = ({onTogleCart}) => {
+const Overlay = ({ onTogleCart, itemsData = [] } ) => {
 
 
-    const View = () => {
-        return (
-            <div className="cartItem">
-                <img width={70} height={70} src="/img/sneackers/2.jpg" alt="sneackers" />
-                <div>
-                    <p>Мужские кроссовки <br />Nike Blazer Mid Suede</p>
-                    <b>12 999 руб.</b>
+    const renderCartItems = (arr) => {
+        const items = arr.map((item, index) => {
+            return (
+                <div className="cartItem" key={index}>
+                    <img width={70} height={70} src={item.image} alt="sneackers" />
+                    <div>
+                        <p>{item.name}</p>
+                        <b>{item.price}</b>
+                    </div>
+                    <img className="remove" src="/img/btnRemove.svg" alt="remove" />
                 </div>
-                <img className="remove" src="/img/btnRemove.svg" alt="remove" />
-            </div>
-        )
-    }
+            )
+        });
+        return (
+            <>
+                {items}
+            </>
+        );
+    };
 
-    const content = <View />
+    const cartItems = renderCartItems(itemsData);
+
 
     return (
         <div className="overlay">
@@ -25,14 +33,15 @@ const Overlay = ({onTogleCart}) => {
                 <h2>Корзина
                     <img
                         className="remove"
-                        src="/img/btnRemove.svg" 
-                        alt="remove" 
-                        onClick={onTogleCart}/>
+                        src="/img/btnRemove.svg"
+                        alt="remove"
+                        onClick={onTogleCart} />
                 </h2>
 
                 <div className="cardItems">
-                    {content}
-                    {content}
+
+                    {cartItems}
+
                 </div>
 
                 <div className="cardAmountPrice">

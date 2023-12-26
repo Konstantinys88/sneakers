@@ -1,46 +1,31 @@
 import './content.scss';
 import Cards from "../card/Cards";
 
-const arr = [
-    {
-        name: 'Мужские Кроссовки Nike Blazer Mid Suede',
-        price: 12999,
-        img: '/img/sneackers/2.jpg',
-    },
-    {
-        name: 'Мужские Кроссовки Nike Air Max 270',
-        price: 11999,
-        img: '/img/sneackers/3.jpg',
-    },
-    {
-        name: 'Кроссовки Puma X Aka Boku Future Rider',
-        price: 13999,
-        img: '/img/sneackers/4.jpg',
-    },
-    {
-        name: 'Мужские Кроссовки Under Armour Curry 8',
-        price: 9999,
-        img: '/img/sneackers/5.jpg',
-    },
-    {
-        name: 'Мужские Кроссовки Under Armour Curry 8',
-        price: 5999,
-        img: '/img/sneackers/6.jpg',
-    },
-];
+import { useEffect, useState } from 'react';
 
-const Content = () => {
+
+const Content = ({ onAddToCart }) => {
+
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        fetch("https://658ab9bbba789a962237a855.mockapi.io/items")
+            .then((res) => {
+                return res.json();
+            })
+            .then(res => setItems(res));
+    }, []);
 
     const renderCards = (arr) => {
         const items = arr.map((item, index) => {
             return (
-                <Cards 
-                key={index} 
-                name={item.name} 
-                price={item.price} 
-                image={item.img} 
-                onPlus= {() => console.log('Добавили в корзину')}
-                onFavorite= {() => console.log('Добавили в закладки')}
+                <Cards
+                    key={index}
+                    name={item.name}
+                    price={item.price}
+                    image={item.img}
+                    onPlus={(obj) => onAddToCart(obj)}
+                    onFavorite={() => console.log('Добавили в закладки')}
                 />
             )
         });
@@ -51,7 +36,7 @@ const Content = () => {
         )
     };
 
-    const cardsItems = renderCards(arr);
+    const cardsItems = renderCards(items);
 
     return (
         <div className="content">

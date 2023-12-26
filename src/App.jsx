@@ -9,15 +9,22 @@ import { useState } from 'react';
 function App() {
 
 	const [cartOpen, setCartOpen] = useState(false);
+	const [cartItems, setCartItems] = useState([]);
+
+	const onAddToCart = (obj) => {
+		setCartItems(prev => [...prev, obj]);
+	};
 
 
 	return (
 		<div className="wrapper">
 
-			{cartOpen ? <Driver onTogleCart={() => setCartOpen(!cartOpen)} /> : null}
+			{cartOpen ? <Driver
+				onTogleCart={() => setCartOpen(!cartOpen)}
+				itemsData={cartItems} /> : null}
 
 			<Header onTogleCart={() => setCartOpen(!cartOpen)} />
-			<Content />
+			<Content onAddToCart={onAddToCart} />
 
 		</div >
 	);
