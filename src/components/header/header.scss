@@ -44,6 +44,10 @@
 
 		li {
 			display: flex;
+
+			a {
+				display: flex;
+			}
 		}
 	}
 
@@ -55,4 +59,3 @@
 		line-height: normal;
 	}
 }
-

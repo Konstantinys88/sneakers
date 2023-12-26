@@ -3,8 +3,10 @@ import Content from "./components/content/Content";
 import Header from "./components/header/Header";
 import Driver from "./components/drawer/Drawer";
 
+import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import axios from "axios";
+import Favorite from "./components/favorite/Favorite";
 
 
 function App() {
@@ -12,7 +14,7 @@ function App() {
 	const [cartOpen, setCartOpen] = useState(false);
 	const [cartItems, setCartItems] = useState([]);
 	const [favorite, setFavorite] = useState([]);
-	
+
 
 	useEffect(() => {
 		axios.get("https://658ab9bbba789a962237a855.mockapi.io/cart").then(res => {
@@ -28,12 +30,11 @@ function App() {
 
 	const onRemoweItem = (id) => {
 		axios.delete(`https://658ab9bbba789a962237a855.mockapi.io/cart/${id}`);
-		setCartItems((prev) => prev.filter(item => item.id !== id ));
+		setCartItems((prev) => prev.filter(item => item.id !== id));
 	}
 
 	const onAddFavorites = (obj) => {
 		axios.post(`https://658b0e2aba789a9622386014.mockapi.io/favorites`, obj);
-		console.log(obj)
 		setFavorite(prev => [...prev, obj]);
 	}
 
@@ -47,12 +48,25 @@ function App() {
 				onRemoweItem={onRemoweItem} /> : null}
 
 			<Header onTogleCart={() => setCartOpen(!cartOpen)} />
-			<Content 
-			onAddToCart={onAddToCart} 
-			onAddFavorites={onAddFavorites}/>
+
+			<Routes>
+				<Route path="/" element={<Content
+					onAddToCart={onAddToCart}
+					onAddFavorites={onAddFavorites} />} />
+
+				<Route path="favorite" element={<Favorite />} />
+			</Routes>
+
+
+
+
+
+
 
 		</div >
 	);
 }
 
 export default App;
+
+
