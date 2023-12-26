@@ -1,22 +1,29 @@
 import { useState } from 'react';
 import './cards.scss';
 
-const Cards = ({ name, price, image, onPlus, onFavorite }) => {
+const Cards = ({ id, name, price, image, onPlus, onFavorite }) => {
 
     const [isAdded, setIsAdded] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(false);
 
     const onClickPlus = () => {
-        onPlus({name, price, image});
+        onPlus({ id, name, price, image });
         setIsAdded(!isAdded);
     }
+
+    const onClickFavorite = () => {
+        setIsFavorite(!isFavorite)
+    }
+
 
     return (
         <div className="card">
             <div className="card__heart" onClick={onFavorite}>
                 <img
+                    onClick={onClickFavorite}
                     className="card__heart"
                     width={32} height={32}
-                    src="/img/heart.svg"
+                    src={isFavorite ? "/img/heartLike.svg" : "/img/heart.svg"}
                     alt="heart" />
             </div>
             <img width={133} height={112} src={image} alt="sneackers" />
@@ -28,11 +35,11 @@ const Cards = ({ name, price, image, onPlus, onFavorite }) => {
                     <br />
                     <b>{price} руб</b>
                 </div>
-                <button className="card__button" onClick={onClickPlus}>
+                <button className="card__button" onClick={onClickPlus} >
                     <img
                         width={32}
                         height={32}
-                        src={isAdded ? "/img/plusAdd.svg": "/img/plus.svg"}
+                        src={isAdded ? "/img/plusAdd.svg" : "/img/plus.svg"}
                         alt="plus" />
                 </button>
             </div>

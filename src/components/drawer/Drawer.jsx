@@ -1,6 +1,6 @@
 
 import './overlay.scss';
-const Overlay = ({ onTogleCart, itemsData = [] } ) => {
+const Overlay = ({ onTogleCart, itemsData = [], onRemoweItem }) => {
 
 
     const renderCartItems = (arr) => {
@@ -12,7 +12,7 @@ const Overlay = ({ onTogleCart, itemsData = [] } ) => {
                         <p>{item.name}</p>
                         <b>{item.price}</b>
                     </div>
-                    <img className="remove" src="/img/btnRemove.svg" alt="remove" />
+                    <img onClick={() => onRemoweItem(item.id)} className="remove" src="/img/btnRemove.svg" alt="remove" />
                 </div>
             )
         });
@@ -24,7 +24,7 @@ const Overlay = ({ onTogleCart, itemsData = [] } ) => {
     };
 
     const cartItems = renderCartItems(itemsData);
-
+    const cartItemsContent = itemsData.length > 0 ? cartItems : "Ваша корзина пуста";
 
     return (
         <div className="overlay">
@@ -40,7 +40,7 @@ const Overlay = ({ onTogleCart, itemsData = [] } ) => {
 
                 <div className="cardItems">
 
-                    {cartItems}
+                    {cartItemsContent}
 
                 </div>
 
