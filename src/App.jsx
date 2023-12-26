@@ -11,6 +11,7 @@ function App() {
 
 	const [cartOpen, setCartOpen] = useState(false);
 	const [cartItems, setCartItems] = useState([]);
+	const [favorite, setFavorite] = useState([]);
 	
 
 	useEffect(() => {
@@ -30,6 +31,12 @@ function App() {
 		setCartItems((prev) => prev.filter(item => item.id !== id ));
 	}
 
+	const onAddFavorites = (obj) => {
+		axios.post(`https://658b0e2aba789a9622386014.mockapi.io/favorites`, obj);
+		console.log(obj)
+		setFavorite(prev => [...prev, obj]);
+	}
+
 
 	return (
 		<div className="wrapper">
@@ -40,7 +47,9 @@ function App() {
 				onRemoweItem={onRemoweItem} /> : null}
 
 			<Header onTogleCart={() => setCartOpen(!cartOpen)} />
-			<Content onAddToCart={onAddToCart} />
+			<Content 
+			onAddToCart={onAddToCart} 
+			onAddFavorites={onAddFavorites}/>
 
 		</div >
 	);

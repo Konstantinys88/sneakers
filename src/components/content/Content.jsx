@@ -5,16 +5,16 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 
-const Content = ({ onAddToCart }) => {
+const Content = ({ onAddToCart, onAddFavorites }) => {
 
     const [items, setItems] = useState([]);
     const [searchValue, setSearchValue] = useState('');
 
 
     useEffect(() => {
-            axios.get("https://658ab9bbba789a962237a855.mockapi.io/items").then(res => {
-                setItems(res.data)
-            })
+        axios.get("https://658ab9bbba789a962237a855.mockapi.io/items").then(res => {
+            setItems(res.data)
+        })
     }, []);
 
 
@@ -34,7 +34,7 @@ const Content = ({ onAddToCart }) => {
                         image={item.img}
                         id={item.id}
                         onPlus={(obj) => onAddToCart(obj)}
-                        onFavorite={() => console.log('Добавили в закладки')}
+                        onAddFavorites={(obj) => onAddFavorites(obj)}
                     />
                 )
             });
