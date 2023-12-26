@@ -1,8 +1,7 @@
 
 import './overlay.scss';
-const Overlay = ({displayDriwer, handleDisplayDriwer}) => {
+const Overlay = ({onTogleCart}) => {
 
-    let styleDisplayDraver = displayDriwer ? { 'display': 'block' } : { 'display': 'none' };
 
     const View = () => {
         return (
@@ -20,13 +19,15 @@ const Overlay = ({displayDriwer, handleDisplayDriwer}) => {
     const content = <View />
 
     return (
-        <div
-            style={styleDisplayDraver}
-            className="overlay">
+        <div className="overlay">
 
             <div className="driwer">
                 <h2>Корзина
-                    <img onClick={handleDisplayDriwer} className="remove" src="/img/btnRemove.svg" alt="remove" />
+                    <img
+                        className="remove"
+                        src="/img/btnRemove.svg" 
+                        alt="remove" 
+                        onClick={onTogleCart}/>
                 </h2>
 
                 <div className="cardItems">

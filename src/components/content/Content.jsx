@@ -34,7 +34,14 @@ const Content = () => {
     const renderCards = (arr) => {
         const items = arr.map((item, index) => {
             return (
-                <Cards key={index} name={item.name} price={item.price} image={item.img} />
+                <Cards 
+                key={index} 
+                name={item.name} 
+                price={item.price} 
+                image={item.img} 
+                onPlus= {() => console.log('Добавили в корзину')}
+                onFavorite= {() => console.log('Добавили в закладки')}
+                />
             )
         });
         return (

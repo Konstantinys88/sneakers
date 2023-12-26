@@ -1,3 +1,14 @@
+.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.11);
+    z-index: 1;
+}
+
+
 .driwer {
     position: absolute;
     width: 420px;
@@ -10,6 +21,8 @@
 
     box-shadow: -10px 4px 24px 0px rgba(0, 0, 0, 0.10);
     padding: 30px;
+
+    z-index: 2;
 
     h2 {
         margin-bottom: 30px;

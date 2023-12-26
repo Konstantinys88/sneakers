@@ -8,24 +8,15 @@ import { useState } from 'react';
 
 function App() {
 
-	const [displayDriwer, setDisplayDriwer] = useState(false);
-	const handleDisplayDriwer = () => {
-		setDisplayDriwer(!displayDriwer)
-	}
+	const [cartOpen, setCartOpen] = useState(false);
 
 
 	return (
 		<div className="wrapper">
 
-			<Driver
-				displayDriwer={displayDriwer}
-				handleDisplayDriwer={handleDisplayDriwer}
-			/>
+			{cartOpen ? <Driver onTogleCart={() => setCartOpen(!cartOpen)} /> : null}
 
-			<Header
-				handleDisplayDriwer={handleDisplayDriwer}
-			/>
-
+			<Header onTogleCart={() => setCartOpen(!cartOpen)} />
 			<Content />
 
 		</div >
