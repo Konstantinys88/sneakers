@@ -5,8 +5,13 @@ import Driver from "./components/drawer/Drawer";
 
 import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from 'react';
+
+import { createContext, useContext } from 'react';
+
 import axios from "axios";
 import Favorite from "./components/favorite/Favorite";
+
+export const AppContext = createContext({});
 
 
 function App() {
@@ -16,9 +21,9 @@ function App() {
 	const [favorite, setFavorite] = useState([]);
 
 
-	useEffect( () => {
+	useEffect(() => {
 
-		async function fetchData () {
+		async function fetchData() {
 			const cartResponse = await axios.get("https://658ab9bbba789a962237a855.mockapi.io/cart");
 			const favoritesResponse = await axios.get("https://658b0e2aba789a9622386014.mockapi.io/favorites");
 
@@ -43,7 +48,7 @@ function App() {
 				setCartItems(prev => [...prev, obj]);
 			}
 		} catch (error) {
-			alert('Не удалось добавить в корзиру !');
+			console.log('Не удалось добавить в корзиру !', error);
 		}
 	};
 
@@ -57,7 +62,7 @@ function App() {
 		try {
 			if (favorite.find(item => Number(item.id) === Number(obj.id))) {
 				axios.delete(`https://658b0e2aba789a9622386014.mockapi.io/favorites/${obj.id}`);
-				// setFavorite(prev => prev.filter(item => item.id !== obj.id));
+				setFavorite(prev => prev.filter(item => item.id !== obj.id));
 			} else {
 				const { data } = await axios.post(`https://658b0e2aba789a9622386014.mockapi.io/favorites`, obj);
 				setFavorite(prev => [...prev, data]);
@@ -67,32 +72,37 @@ function App() {
 		}
 	};
 
+	const isAddedItems = (id) => {
+		return cartItems.some(obj => Number(obj.id) === Number(id))
+	}
+
 
 	return (
-		<div className="wrapper">
+		<AppContext.Provider value={{cartItems, favorite, onAddFavorites, isAddedItems}}>
 
-			{cartOpen ? <Driver
-				onTogleCart={() => setCartOpen(!cartOpen)}
-				itemsData={cartItems}
-				onRemoweItem={onRemoweItem} /> : null}
+			<div className="wrapper">
+				{cartOpen ? <Driver
+					onTogleCart={() => setCartOpen(!cartOpen)}
+					itemsData={cartItems}
+					onRemoweItem={onRemoweItem} /> : null}
 
-			<Header onTogleCart={() => setCartOpen(!cartOpen)} />
+				<Header onTogleCart={() => setCartOpen(!cartOpen)} />
 
-			<Routes>
-				<Route path="/" element={<Content
-					onAddToCart={onAddToCart}
-					onAddFavorites={onAddFavorites}
-					cartItems={cartItems} />} />
+				<Routes>
+					<Route path="/" element={<Content
+						onAddToCart={onAddToCart}
+						onAddFavorites={onAddFavorites}
+						/>} />
 
-				<Route path="favorite" element={<Favorite
-					favorite={favorite}
-					onAddFavorites={onAddFavorites} />} />
-			</Routes>
+					<Route path="favorite" element={<Favorite />} />
+				</Routes>
+			</div >
 
-		</div >
+		</AppContext.Provider>
 	);
 }
 
 export default App;
 
 
+// 1.10

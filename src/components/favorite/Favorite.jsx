@@ -1,7 +1,12 @@
 import './favorites.scss'
 import Cards from '../card/Cards';
 
-const Favorite = ({ favorite, onAddToCart, onAddFavorites }) => {
+import { useContext } from 'react';
+import { AppContext } from '../../App';
+
+const Favorite = ({ onAddToCart}) => {
+
+    const stateFavorite = useContext(AppContext);
 
     const renderCards = (arr) => {
         const items = arr.filter(item => item.name.toLowerCase())
@@ -15,7 +20,6 @@ const Favorite = ({ favorite, onAddToCart, onAddFavorites }) => {
                         id={item.id}
                         isFavorited ={true}
                         onPlus={(obj) => onAddToCart(obj)}
-                        onAddFavorites={(obj) => onAddFavorites(obj)}
                     />
 
                 )
@@ -27,7 +31,7 @@ const Favorite = ({ favorite, onAddToCart, onAddFavorites }) => {
         )
     };
 
-    const cardsItems = renderCards(favorite);
+    const cardsItems = renderCards(stateFavorite.favorite);
 
     return (
         <div className="favorites">

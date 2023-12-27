@@ -2,23 +2,29 @@ import './content.scss';
 import Cards from "../card/Cards";
 import axios from 'axios';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { AppContext } from '../../App';
 
 
-const Content = ({ onAddToCart, onAddFavorites, cartItems }) => {
+const Content = ({ onAddToCart, onAddFavorites }) => {
+
+    const stateCartItems = useContext(AppContext);
+    // console.log(stateCartItems)
 
     const [items, setItems] = useState([]);
     const [searchValue, setSearchValue] = useState('');
-
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function fetchData() {
             const itemsResponse = await axios.get("https://658ab9bbba789a962237a855.mockapi.io/items");
             setItems(itemsResponse.data)
+
+            setLoading(false);
         }
         fetchData();
-    }, []);
 
+    }, []);
 
     const onChangeSearchInput = (e) => {
         setSearchValue(e.target.value)
@@ -36,9 +42,10 @@ const Content = ({ onAddToCart, onAddFavorites, cartItems }) => {
                         image={item.img}
                         id={item.id}
                         // isFavorited ={true}
-                        added={cartItems.some(obj => Number(obj.id) === Number(item.id))}
+                        // added={stateCartItems.isAddedItems(item.id)}
                         onPlus={(obj) => onAddToCart(obj)}
                         onAddFavorites={(obj) => onAddFavorites(obj)}
+                        isLoading={loading}
                     />
                 )
             });
