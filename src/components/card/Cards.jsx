@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import './cards.scss';
 
-const Cards = ({ id, name, price, image, onPlus, onAddFavorites }) => {
+const Cards = ({ id, name, price, image, onPlus, onAddFavorites, isFavorited = false}) => {
 
     const [isAdded, setIsAdded] = useState(false);
-    const [isFavorite, setIsFavorite] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(isFavorited);
 
     const onClickPlus = () => {
         onPlus({ id, name, price, image });
@@ -21,7 +21,6 @@ const Cards = ({ id, name, price, image, onPlus, onAddFavorites }) => {
         <div className="card">
             <div className="card__heart" onClick={onClickFavorite}>
                 <img
-                    onClick={onClickFavorite}
                     className="card__heart"
                     width={32} height={32}
                     src={isFavorite ? "/img/heartLike.svg" : "/img/heart.svg"}

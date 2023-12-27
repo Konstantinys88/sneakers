@@ -33,6 +33,7 @@ const Content = ({ onAddToCart, onAddFavorites }) => {
                         price={item.price}
                         image={item.img}
                         id={item.id}
+                        // isFavorited ={true}
                         onPlus={(obj) => onAddToCart(obj)}
                         onAddFavorites={(obj) => onAddFavorites(obj)}
                     />
