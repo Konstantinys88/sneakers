@@ -5,16 +5,18 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 
-const Content = ({ onAddToCart, onAddFavorites }) => {
+const Content = ({ onAddToCart, onAddFavorites, cartItems }) => {
 
     const [items, setItems] = useState([]);
     const [searchValue, setSearchValue] = useState('');
 
 
     useEffect(() => {
-        axios.get("https://658ab9bbba789a962237a855.mockapi.io/items").then(res => {
-            setItems(res.data)
-        })
+        async function fetchData() {
+            const itemsResponse = await axios.get("https://658ab9bbba789a962237a855.mockapi.io/items");
+            setItems(itemsResponse.data)
+        }
+        fetchData();
     }, []);
 
 
@@ -34,6 +36,7 @@ const Content = ({ onAddToCart, onAddFavorites }) => {
                         image={item.img}
                         id={item.id}
                         // isFavorited ={true}
+                        added={cartItems.some(obj => Number(obj.id) === Number(item.id))}
                         onPlus={(obj) => onAddToCart(obj)}
                         onAddFavorites={(obj) => onAddFavorites(obj)}
                     />
