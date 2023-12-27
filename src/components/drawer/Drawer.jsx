@@ -1,7 +1,38 @@
-
 import './overlay.scss';
-const Overlay = ({ onTogleCart, itemsData = [], onRemoweItem }) => {
 
+import Info from '../info/Info';
+import { useState, useContext } from 'react';
+import { AppContext } from '../../App';
+
+import axios from 'axios';
+
+const delay = (ms) => {
+    new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+const Overlay = ({ onTogleCart, onRemoweItem }) => {
+
+    const { cartItems, setCartItems } = useContext(AppContext);
+    const [isOrderComplete, setIsOrderComplete] = useState();
+    const [orderId, setOrderId] = useState(null);
+
+    const onClickOrder = async () => {
+        try {
+            const { data } = await axios.post(`https://658b0e2aba789a9622386014.mockapi.io/orders`, { itemss: cartItems });
+            setOrderId(data.id)
+            setIsOrderComplete(true);
+            setCartItems([]);
+
+            for (let i = 0; i < cartItems.length; i++) {
+                const item = cartItems[i];
+                await axios.delete(`https://658ab9bbba789a962237a855.mockapi.io/cart/${item.id}`);
+                delay(10000)
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const renderCartItems = (arr) => {
         const items = arr.map((item, index) => {
@@ -23,8 +54,17 @@ const Overlay = ({ onTogleCart, itemsData = [], onRemoweItem }) => {
         );
     };
 
-    const cartItems = renderCartItems(itemsData);
-    const cartItemsContent = itemsData.length > 0 ? cartItems : "Ваша корзина пуста";
+    const cartItemsRender = renderCartItems(cartItems);
+
+    const cartItemsContent = cartItems.length > 0 ? cartItemsRender : <Info
+        title={`Корзина пуста`}
+        description={`Добавьте хотябы одну пару кросовок чтобы сделать заказ...`}
+        image={`/img/empty-cart.jpg`} />;
+
+    const content = isOrderComplete ? <Info
+        title={`Заказ отправлен`}
+        description={`Нашы собтральщики уже собирают ваш заказ № ${orderId} !!!`}
+        image={`/img/empty-cart.jpg`} /> : cartItemsContent;
 
     return (
         <div className="overlay">
@@ -40,7 +80,7 @@ const Overlay = ({ onTogleCart, itemsData = [], onRemoweItem }) => {
 
                 <div className="cardItems">
 
-                    {cartItemsContent}
+                    {content}
 
                 </div>
 
@@ -52,7 +92,7 @@ const Overlay = ({ onTogleCart, itemsData = [], onRemoweItem }) => {
                             <b>21 498 руб. </b>
                         </li>
                     </ul>
-                    <button className="cardAmountPrice__button">Оформить заказ</button>
+                    <button onClick={onClickOrder} className="cardAmountPrice__button">Оформить заказ</button>
                 </div>
 
             </div>

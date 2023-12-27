@@ -2,14 +2,13 @@ import './content.scss';
 import Cards from "../card/Cards";
 import axios from 'axios';
 
-import { useEffect, useState, useContext } from 'react';
-import { AppContext } from '../../App';
+import { useEffect, useState } from 'react';
+
 
 
 const Content = ({ onAddToCart, onAddFavorites }) => {
 
-    const stateCartItems = useContext(AppContext);
-    // console.log(stateCartItems)
+
 
     const [items, setItems] = useState([]);
     const [searchValue, setSearchValue] = useState('');

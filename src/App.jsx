@@ -6,7 +6,7 @@ import Driver from "./components/drawer/Drawer";
 import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from 'react';
 
-import { createContext, useContext } from 'react';
+import { createContext } from 'react';
 
 import axios from "axios";
 import Favorite from "./components/favorite/Favorite";
@@ -20,6 +20,7 @@ function App() {
 	const [cartItems, setCartItems] = useState([]);
 	const [favorite, setFavorite] = useState([]);
 
+	console.log(cartItems)
 
 	useEffect(() => {
 
@@ -78,7 +79,7 @@ function App() {
 
 
 	return (
-		<AppContext.Provider value={{cartItems, favorite, onAddFavorites, isAddedItems}}>
+		<AppContext.Provider value={{ cartItems, setCartItems, favorite, onAddFavorites, isAddedItems, setCartOpen }}>
 
 			<div className="wrapper">
 				{cartOpen ? <Driver
@@ -92,7 +93,7 @@ function App() {
 					<Route path="/" element={<Content
 						onAddToCart={onAddToCart}
 						onAddFavorites={onAddFavorites}
-						/>} />
+					/>} />
 
 					<Route path="favorite" element={<Favorite />} />
 				</Routes>
@@ -105,4 +106,4 @@ function App() {
 export default App;
 
 
-// 1.10
+// 2.51
