@@ -1,0 +1,38 @@
+.content {
+	padding: 40px;
+
+	&__sneackers {
+		margin-top: 40px;
+		display: flex;
+		gap: 40px;
+		flex-wrap: wrap;
+	}
+}
+
+.searchContainer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.searchBlock {
+	display: flex;
+	align-items: center;
+	width: 250px;
+	border-radius: 10px;
+	border: 1px solid #F3F3F3;
+	padding: 0 15px;
+
+	&__search {
+		color: #181616;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: normal;
+		padding: 13px;
+		border: none;
+		outline: none;
+		width: 200px;
+	}
+
+}
