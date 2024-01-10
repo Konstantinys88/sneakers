@@ -8,3 +8,5 @@
 - SCSS
 - React Context
 - React Skeleton
+
+- mockapi

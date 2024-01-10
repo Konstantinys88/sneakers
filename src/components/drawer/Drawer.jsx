@@ -1,10 +1,11 @@
 import './overlay.scss';
 
 import Info from '../info/Info';
-import { useState, useContext } from 'react';
-import { AppContext } from '../../App';
+import { useState } from 'react';
+import { useCart } from '../../hooks/useCart';
 
 import axios from 'axios';
+
 
 const delay = (ms) => {
     new Promise((resolve) => setTimeout(resolve, ms))
@@ -12,13 +13,13 @@ const delay = (ms) => {
 
 const Overlay = ({ onTogleCart, onRemoweItem }) => {
 
-    const { cartItems, setCartItems } = useContext(AppContext);
+    const { cartItems, setCartItems, totalPrice } = useCart();
     const [isOrderComplete, setIsOrderComplete] = useState();
     const [orderId, setOrderId] = useState(null);
 
     const onClickOrder = async () => {
         try {
-            const { data } = await axios.post(`https://658b0e2aba789a9622386014.mockapi.io/orders`, { itemss: cartItems });
+            const { data } = await axios.post(`https://658b0e2aba789a9622386014.mockapi.io/orders`, { items: cartItems });
             setOrderId(data.id)
             setIsOrderComplete(true);
             setCartItems([]);
@@ -63,7 +64,7 @@ const Overlay = ({ onTogleCart, onRemoweItem }) => {
 
     const content = isOrderComplete ? <Info
         title={`Заказ отправлен`}
-        description={`Нашы собтральщики уже собирают ваш заказ № ${orderId} !!!`}
+        description={`Нашы сотрудники уже собирают ваш заказ № ${orderId} !!!`}
         image={`/img/empty-cart.jpg`} /> : cartItemsContent;
 
     return (
@@ -89,7 +90,7 @@ const Overlay = ({ onTogleCart, onRemoweItem }) => {
                         <li className="amountPrice">
                             <span className="amountPrice__text">Итого</span>
                             <div className="amountPrice__dash"></div>
-                            <b>21 498 руб. </b>
+                            <b>{totalPrice} руб.</b>
                         </li>
                     </ul>
                     <button onClick={onClickOrder} className="cardAmountPrice__button">Оформить заказ</button>

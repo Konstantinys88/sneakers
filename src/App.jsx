@@ -10,6 +10,7 @@ import { createContext } from 'react';
 
 import axios from "axios";
 import Favorite from "./components/favorite/Favorite";
+import Orders from "./components/orders/Orders";
 
 export const AppContext = createContext({});
 
@@ -19,8 +20,6 @@ function App() {
 	const [cartOpen, setCartOpen] = useState(false);
 	const [cartItems, setCartItems] = useState([]);
 	const [favorite, setFavorite] = useState([]);
-
-	console.log(cartItems)
 
 	useEffect(() => {
 
@@ -96,6 +95,9 @@ function App() {
 					/>} />
 
 					<Route path="favorite" element={<Favorite />} />
+
+					<Route path="orders" element={<Orders />} />
+
 				</Routes>
 			</div >
 
