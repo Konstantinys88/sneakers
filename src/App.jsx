@@ -41,15 +41,16 @@ function App() {
 
 
 	const onAddToCart = async (obj) => {
-		console.log(obj)
+		// console.log(obj)
 		try {
-			if (cartItems.find(item => Number(item.id) === Number(obj.id))) {
+			const findItem = cartItems.find(item => Number(item.parentId) === Number(obj.id));
+			if (findItem) {
 				console.log('Уже есть')
-				setCartItems(prev => prev.filter(item => Number(item.id) !== Number(obj.id)));
-				await axios.delete(`https://658ab9bbba789a962237a855.mockapi.io/cart/${obj.id}`);
+				setCartItems(prev => prev.filter(item => Number(item.parentId) !== Number(obj.id)));
+				await axios.delete(`https://658ab9bbba789a962237a855.mockapi.io/cart/${findItem.id}`);
 			} else {
-				await axios.post('https://658ab9bbba789a962237a855.mockapi.io/cart', obj);
-				setCartItems(prev => [...prev, obj]);
+				const { data } = await axios.post('https://658ab9bbba789a962237a855.mockapi.io/cart', obj);
+				setCartItems(prev => [...prev, data]);
 			}
 		} catch (error) {
 			console.log('Не удалось добавить в корзиру !', error);
@@ -82,7 +83,7 @@ function App() {
 
 
 	return (
-		<AppContext.Provider value={{ cartItems, setCartItems, favorite, onAddFavorites, isAddedItems, setCartOpen }}>
+		<AppContext.Provider value={{ cartItems, setCartItems, favorite, onAddFavorites, isAddedItems, setCartOpen, onAddToCart }}>
 
 			<div className="wrapper">
 				{cartOpen ? <Driver
@@ -98,7 +99,7 @@ function App() {
 						onAddFavorites={onAddFavorites}
 					/>} />
 
-					<Route path="favorite" element={<Favorite />} />
+					<Route path="favorite" element={<Favorite onAddToCart={onAddToCart}/>} />
 
 					<Route path="orders" element={<Orders />} />
 
