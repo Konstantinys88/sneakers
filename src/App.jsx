@@ -24,11 +24,15 @@ function App() {
 	useEffect(() => {
 
 		async function fetchData() {
-			const cartResponse = await axios.get("https://658ab9bbba789a962237a855.mockapi.io/cart");
-			const favoritesResponse = await axios.get("https://658b0e2aba789a9622386014.mockapi.io/favorites");
+			try {
+				const cartResponse = await axios.get("https://658ab9bbba789a962237a855.mockapi.io/cart");
+				const favoritesResponse = await axios.get("https://658b0e2aba789a9622386014.mockapi.io/favorites");
 
-			setCartItems(cartResponse.data);
-			setFavorite(favoritesResponse.data);
+				setCartItems(cartResponse.data);
+				setFavorite(favoritesResponse.data);
+			} catch (error) {
+				console.log(error)
+			}
 		}
 
 		fetchData();
@@ -73,7 +77,7 @@ function App() {
 	};
 
 	const isAddedItems = (id) => {
-		return cartItems.some(obj => Number(obj.id) === Number(id))
+		return cartItems.some(obj => Number(obj.parentId) === Number(id))
 	}
 
 

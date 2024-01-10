@@ -6,19 +6,19 @@ import ContentLoader from "react-content-loader";
 import { useContext } from 'react';
 import { AppContext } from '../../App';
 
-const Cards = ({ id, name, price, image, onPlus, isFavorited = false, isLoading = false }) => {
+const Cards = ({ id, name, price, image, onPlus, isFavorited = false, isLoading = false, parentId }) => {
 
     const stateCards = useContext(AppContext);
     const { isAddedItems } = useContext(AppContext)
-
     const [isFavorite, setIsFavorite] = useState(isFavorited);
+    const obj = { id, name, price, image, parentId: id }
 
     const onClickPlus = () => {
-        onPlus({ id, name, price, image });
+        onPlus(obj);
     }
 
     const onClickFavorite = () => {
-        stateCards.onAddFavorites({ id, name, price, image });
+        stateCards.onAddFavorites(obj);
         setIsFavorite(!isFavorite);
     }
 
